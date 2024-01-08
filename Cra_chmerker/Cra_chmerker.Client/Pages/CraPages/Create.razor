@@ -1,0 +1,26 @@
+﻿@page "/cra/create"
+@using System.Globalization
+@rendermode InteractiveAuto
+
+
+<h3>Create</h3>
+<p>Complete your Cra for each day of the month</p>
+
+<EditForm FormName="pxl" Model="@cra" OnValidSubmit="HandleSubmit">
+     
+    @foreach (var day in cra.Days.Keys)
+    {
+        <div class="form-group" @key="day">
+            <label for="@day">@cra.Month.AddDays(day-1).ToString("dddd dd MMMM yyyy")</label>
+            <InputNumber max="8" min="0" id="@day" class="form-control my-1" 
+            @bind-Value="cra.Days[day]" 
+            TValue="int"/>
+        </div>
+    }
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+    </div>
+ </EditForm>
+

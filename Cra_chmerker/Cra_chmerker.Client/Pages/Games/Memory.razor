@@ -1,0 +1,54 @@
+﻿@page "/games/memory"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+
+<h3>Memory</h3>
+
+@if(game?.Cards == null){
+    <p>loading...</p>
+    return;
+}
+else if(!game.IsGameOver)
+{
+    <div class="d-flex card-container">
+
+        @foreach(var c in game.Cards){
+
+        <div class="m-2" @onclick="@(()=>game.Flip(c))">
+            @if(c.IsFlipped)
+            {
+                <img src="@c.ImageUrl.Thumb" alt="1" height="200" width="200" />
+            }
+            else
+            {
+                <img src="@bgUrl" alt="1" height="200" width="200" />
+            }        
+        </div>
+        }
+    </div>
+}
+else
+{
+    <h3>Bravo vous avez résolu en @game.Score coups</h3>
+    <div>
+        <p>Nombre de paire de cartes pour la prochaine partie</p>
+        <input type="number" @bind="@numberOfPairs" />
+    </div>
+    <button class="btn btn-primary" @onclick="@(()=>game.Init(numberOfPairs))">Start</button>
+}
+
+<style>
+.card-container {
+        flex-wrap: wrap;
+        max-width: 1130px;
+        background-color: #f1f1f1;
+        padding: 20px;
+    }
+    .card-container div {
+        border: 1px solid black;
+        border-radius:15px;
+        overflow : hidden;
+    }
+    
+</style>
+

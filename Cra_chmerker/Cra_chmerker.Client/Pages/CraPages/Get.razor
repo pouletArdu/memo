@@ -1,0 +1,83 @@
+﻿@page "/cra/get/{Month:int}/{Year:int}"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+
+<h3>Get</h3>
+<p>Get your Cra for each day of the month</p>
+
+
+@if (cra != null)
+{
+    <h3>@cra?.Month.ToString("MMM yyyy") status @cra?.Status</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Hours</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var day in cra.Days.Keys)
+            {
+                <tr>
+                    <th scope="row">@cra.Month.AddDays(day - 1).ToString("dddd dd MMMM yyyy")</th>
+                    <td>@cra.Days[day]</td>
+                    <td>@cra.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
+
+
+}
+
+
+@code {
+    [Parameter]
+    public int Month { get; set; }
+    [Parameter]
+    public int Year { get; set; }
+
+    private HttpClient httpClient = new HttpClient();
+    private Cra cra;
+
+    private async Task<Cra> GetCraData(int month, int year)
+    {
+        var response = await httpClient.GetAsync($"https://localhost:7248/api/Cra?month={month}&year={year}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var t = await response.Content.ReadAsStringAsync();
+            var craData = await response.Content.ReadFromJsonAsync<Cra>();
+            return craData;
+        }
+        else
+        {
+            // Gérer l'erreur
+            return null;
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {            
+            await Task.Delay(2000);
+            cra = await GetCraData(Month, Year);
+            StateHasChanged();
+            
+        }
+    }
+
+
+}
