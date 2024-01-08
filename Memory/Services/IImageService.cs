@@ -2,5 +2,5 @@
 
 public interface IImageService
 {
-    public Task<List<Image>> Get(int count);
+    public Task<List<Image>> Get(int count, string theme = "animals");
 }

@@ -2,22 +2,17 @@
 
 namespace Memory;
 
-public class Game
+public class Game(IImageService imageService)
 {
-    private readonly IImageService imageService;
-    public Game(IImageService imageService) 
-    {
-        this.imageService = imageService;      
-    }
-
+    private readonly IImageService imageService = imageService;
     public int Score;  
     public List<Card>? Cards { get; set; }
 
-    public bool IsGameOver = false;
+    public bool IsGameOver = true;
 
-    public async Task Init(int numberOfPairs) 
+    public async Task Init(int numberOfPairs, string theme) 
     {
-        var images = await imageService.Get(numberOfPairs);
+        var images = await imageService.Get(numberOfPairs, theme);
         Cards = images.SelectMany(i => new List<Card> {
            new(i), 
            new(i) 

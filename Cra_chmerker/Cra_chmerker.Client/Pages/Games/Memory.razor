@@ -4,12 +4,19 @@
 
 <h3>Memory</h3>
 
-@if(game?.Cards == null){
+@if(game?.Cards == null && !game.IsGameOver){
     <p>loading...</p>
     return;
 }
 else if(!game.IsGameOver)
 {
+    <div>
+        
+       <p>stop game</p>
+        <button class="btn btn-primary" @onclick="@(()=>game.IsGameOver = true)">Start</button>
+
+    </div>
+    <h3>Score : @game.Score</h3>
     <div class="d-flex card-container">
 
         @foreach(var c in game.Cards){
@@ -31,10 +38,16 @@ else
 {
     <h3>Bravo vous avez résolu en @game.Score coups</h3>
     <div>
-        <p>Nombre de paire de cartes pour la prochaine partie</p>
-        <input type="number" @bind="@numberOfPairs" />
+        <div>
+            <label>Nombre de paires</label>
+            <input type="number" @bind="@numberOfPairs" />
+        </div>
+        <div>
+            <label>Theme</label>
+            <input type="text" @bind="@theme" />
+        </div>
     </div>
-    <button class="btn btn-primary" @onclick="@(()=>game.Init(numberOfPairs))">Start</button>
+    <button class="btn btn-primary" @onclick="@(()=>game.Init(numberOfPairs, theme))">Start</button>
 }
 
 <style>

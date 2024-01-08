@@ -6,21 +6,26 @@ public class ImageService(HttpClient httpClient) : IImageService
 {
     private readonly HttpClient _httpClient = httpClient;
 
-    public async Task<List<Image>> Get(int count)
+    public async Task<List<Image>> Get(int count, string theme= "animals")
     {
         try
         {
-            string uri = $"photos?per_page={count}";
+            string uri = $"search/photos?per_page={count}&query={theme}";
 
 
-            var images = await _httpClient.GetFromJsonAsync<List<Image>>(uri);
-            return images;
+            var images = await _httpClient.GetFromJsonAsync<Response>(uri);
+            return images.Results;
 
         }
         catch (Exception e)
         {
             throw;
         }
+    }
+
+    public class Response
+    {
+        public List<Image> Results { get; set; }
     }
 }
 
