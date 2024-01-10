@@ -2,6 +2,7 @@
 @rendermode InteractiveServer
 @attribute [StreamRendering(true)]
 
+
 <h3>Memory</h3>
 
 @if(game?.Cards == null && !game.IsGameOver){
@@ -17,11 +18,12 @@ else if(!game.IsGameOver)
 
     </div>
     <h3>Score : @game.Score</h3>
+    <Cra_chmerker.Client.Components.Timer Watch="@game.Time" />
     <div class="d-flex card-container">
 
         @foreach(var c in game.Cards){
 
-        <div class="m-2" @onclick="@(()=>game.Flip(c))">
+            <div class="m-2 shadow p-1" @onclick="@(()=>game.Flip(c))">
             @if(c.IsFlipped)
             {
                 <img src="@c.ImageUrl.Thumb" alt="1" height="200" width="200" />
@@ -37,6 +39,8 @@ else if(!game.IsGameOver)
 else
 {
     <h3>Bravo vous avez résolu en @game.Score coups</h3>
+    <h3>Temps écoulé : @game.Time?.Elapsed.Minutes.ToString("00") : @game.Time?.Elapsed.Seconds.ToString("00") </h3>
+
     <div>
         <div>
             <label>Nombre de paires</label>
@@ -53,12 +57,11 @@ else
 <style>
 .card-container {
         flex-wrap: wrap;
-        max-width: 1130px;
-        background-color: #f1f1f1;
+        max-width: 2000px;
+        /* background-color: #f1f1f1; */
         padding: 20px;
     }
-    .card-container div {
-        border: 1px solid black;
+    .card-container div {        
         border-radius:15px;
         overflow : hidden;
     }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Cra_chmerker.Client.Pages.Games
 {
-    public partial class Memory : ComponentBase
+    public partial class CardMemory : ComponentBase
     {
         [Inject]
         private Game game { get; set; }

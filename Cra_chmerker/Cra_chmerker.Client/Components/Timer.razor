@@ -1,0 +1,20 @@
+﻿@using System.Diagnostics
+<div class="">
+    @Watch.Elapsed.Minutes.ToString("00") : @Watch.Elapsed.Seconds.ToString("00")
+</div>
+
+
+
+@code {
+    [Parameter]
+    public Stopwatch Watch { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        System.Timers.Timer timer = new(50);
+        timer.Elapsed += (sender, e) => InvokeAsync(StateHasChanged);
+        timer.Start();
+    }
+
+}

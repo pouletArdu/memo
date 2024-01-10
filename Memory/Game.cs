@@ -1,11 +1,14 @@
 ﻿using Memory.Services;
+using System.Diagnostics;
 
 namespace Memory;
 
 public class Game(IImageService imageService)
 {
     private readonly IImageService imageService = imageService;
-    public int Score;  
+    public int Score;
+    public Stopwatch Time;
+
     public List<Card>? Cards { get; set; }
 
     public bool IsGameOver = true;
@@ -17,9 +20,10 @@ public class Game(IImageService imageService)
            new(i), 
            new(i) 
         }).ToList();
-        Cards.Shuffle();
+        //Cards.Shuffle();
         IsGameOver = false;
         Score = 0;
+        Time = Stopwatch.StartNew();
     }
 
     public void Flip(Card card)
@@ -37,6 +41,7 @@ public class Game(IImageService imageService)
 
         if (Cards.All(c => c.IsMatched))
         {
+            Time.Stop();
             IsGameOver = true;
         }
     }

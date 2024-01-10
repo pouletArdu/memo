@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cra_chmerker.Client", "Cra_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj", "{51805865-6B7A-4D82-82C0-782F61D13169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memory", "Memory\Memory.csproj", "{497E6E64-73BD-4D72-98DC-CA84E0BD516F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory", "Memory\Memory.csproj", "{497E6E64-73BD-4D72-98DC-CA84E0BD516F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
