@@ -26,11 +26,12 @@ else if(!game.IsGameOver)
             <div class="m-2 shadow p-1" @onclick="@(()=>game.Flip(c))">
             @if(c.IsFlipped)
             {
-                <img src="@c.ImageUrl.Thumb" alt="1" height="200" width="200" />
+                <img src="@c.ImageUrl.Regular" alt="1" height="300" width="300" />
+
             }
             else
             {
-                <img src="@bgUrl" alt="1" height="200" width="200" />
+                <img src="@bgUrl" alt="1" height="300" width="300" />
             }        
         </div>
         }

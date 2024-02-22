@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory", "Memory\Memory.csproj", "{497E6E64-73BD-4D72-98DC-CA84E0BD516F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Démineur", "Démineur\Démineur.csproj", "{7F325D29-A8A4-452A-964A-32BD2F028069}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{497E6E64-73BD-4D72-98DC-CA84E0BD516F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{497E6E64-73BD-4D72-98DC-CA84E0BD516F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{497E6E64-73BD-4D72-98DC-CA84E0BD516F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F325D29-A8A4-452A-964A-32BD2F028069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F325D29-A8A4-452A-964A-32BD2F028069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F325D29-A8A4-452A-964A-32BD2F028069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F325D29-A8A4-452A-964A-32BD2F028069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,17 @@ using Memory.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Headers;
 
+
+
+var game = new Démineur.Game(9,9*2);
+game.DisplayFieldInConsole();
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

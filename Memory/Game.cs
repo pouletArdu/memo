@@ -20,7 +20,7 @@ public class Game(IImageService imageService)
            new(i), 
            new(i) 
         }).ToList();
-        //Cards.Shuffle();
+        Cards.Shuffle();
         IsGameOver = false;
         Score = 0;
         Time = Stopwatch.StartNew();

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Démineur\Démineur.csproj" />
     <ProjectReference Include="..\..\Infra\Infra.csproj" />
     <ProjectReference Include="..\Cra_chmerker.Client\Cra_chmerker.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />

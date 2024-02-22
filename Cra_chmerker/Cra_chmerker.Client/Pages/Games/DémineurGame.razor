@@ -1,0 +1,70 @@
+﻿@page "/games/demineur"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+<h3>DémineurGame</h3>
+<CascadingValue Value="@game">
+@if(game != null && !game.IsGameOver)
+{
+    for(var i = 0; i< game.Field.GetLength(0); i++)
+    {
+            <div class="ligne d-flex" @oncontextmenu:preventDefault="true">
+            @for(var j = 0; j < game.Field.GetLength(1); j++)
+            {
+                <div @onclick="StateHasChanged">
+                    <Cra_chmerker.Client.Components.Games.CellComponent Cell="@game.Field[i, j]"  />
+                </div>
+            }
+
+        </div>
+    }
+}
+else
+{
+    <h3>Bravo vous avez gagné en ... coups</h3>
+   
+    <div>
+        <div>
+            <label>Niveau</label>
+            <select @bind="@level">
+                <option value="0">Facile</option>
+                <option value="1">Moyen</option>
+                <option value="2">Difficile</option>
+            </select>
+        </div>
+        </div>
+  
+    <button class="btn btn-primary" @onclick="StartGame">Start</button>
+}
+</CascadingValue>
+<style>
+    .ligne{
+        flex-wrap: wrap;
+    }
+</style>
+@code {
+    Démineur.Game game;
+    private GameLevel level{ get; set; } = GameLevel.Easy;
+    private void StartGame()
+    {
+        switch (level)
+        {
+            case GameLevel.Easy:
+                game = new Démineur.Game(12, 20); 
+                break;
+            case GameLevel.Medium:
+                game = new Démineur.Game(15, 40);
+                break;
+            case GameLevel.Hard:
+                game = new Démineur.Game(20, 100);
+                break;
+        }
+        StateHasChanged();
+    }
+
+    enum GameLevel
+    {
+        Easy,
+        Medium,
+        Hard
+    }
+}

@@ -1,0 +1,106 @@
+﻿@if(Cell.IsRevealed)
+{
+    if(Cell.IsMined)
+    {
+<div class="cell mine">
+            <i class="fas fa-bomb"></i>
+</div>
+    }
+    else
+    {
+<div class="cell revealed" >
+    @if (Cell.NeighbourMines > 0)
+    {
+        
+        @* i want to colorize the number of mines different in function of the number of mines *@
+        <span class="neighborMines" style="color: @GetColor()">@Cell.NeighbourMines</span>
+
+
+    }
+</div>
+    }
+}
+else
+{
+    <div class="cell" @onclick="()=> {Game.RevealCell(Cell);}" @oncontextmenu="HandleRightClick" @oncontextmenu:preventDefault="true">
+    @if (Cell.IsFlagged)
+    {
+            <i class="far fa-flag"></i>       
+    }
+   
+</div>
+}
+<style>
+    .cell {
+        /* ajout ombre pour que la case soit en relief */
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        margin: 2px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .fa-flag {
+        
+        color: green;
+    }
+    .revealed {
+        background-color: lightgray;
+    }
+
+    .mine {
+        color: red;
+    }
+
+    .neighborMines {
+        font-size: 20px;
+    }
+
+    .material-icons {
+        font-size: 30px;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public Cell Cell { get; set; }
+
+    // ref to the game
+    [CascadingParameter]
+    public Démineur.Game Game { get; set; }
+
+    private void HandleRightClick(MouseEventArgs args)
+    {
+        if (args.Button == 2)
+            Game.FlagCell(Cell);
+    }
+
+    private string GetColor()
+    {
+        switch (Cell.NeighbourMines)
+        {
+            case 1:
+                return "blue";
+            case 2:
+                return "green";
+            case 3:
+                return "red";
+            case 4:
+                return "purple";
+            case 5:
+                return "orange";
+            case 6:
+                return "pink";
+            case 7:
+                return "brown";
+            case 8:
+                return "black";
+            default:
+                return "black";
+        }
+    }
+}
+
+
